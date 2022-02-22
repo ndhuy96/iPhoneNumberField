@@ -275,18 +275,24 @@ public struct iPhoneNumberField: UIViewRepresentable {
                 }
             }
             
-            displayedText.wrappedValue = textField.text ?? ""
+            DispatchQueue.main.async {
+                self.displayedText.wrappedValue = textField.text ?? ""
+            }
             onEditingChange(textField)
             onPhoneNumberChange(textField.phoneNumber)
         }
 
         public func textFieldDidBeginEditing(_ textField: UITextField) {
-            isFirstResponder.wrappedValue = true
+            DispatchQueue.main.async {
+                self.isFirstResponder.wrappedValue = true
+            }
             onBeginEditing(textField as! PhoneNumberTextField)
         }
 
         public func textFieldDidEndEditing(_ textField: UITextField) {
-            isFirstResponder.wrappedValue = false
+            DispatchQueue.main.async {
+                self.isFirstResponder.wrappedValue = false
+            }
             onEndEditing(textField as! PhoneNumberTextField)
         }
         
